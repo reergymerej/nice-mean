@@ -1,11 +1,15 @@
 'use strict';
 
 // User routes use users controller
+// The users controller is in /app/controllers/users.js.
 var users = require('../controllers/users');
 
 module.exports = function(app, passport) {
 
     app.get('/signin', users.signin);
+
+    // Execute the signup method of the users controller.
+    // GOTO: /app/controllers/users.js:signup
     app.get('/signup', users.signup);
     app.get('/signout', users.signout);
     app.get('/users/me', users.me);

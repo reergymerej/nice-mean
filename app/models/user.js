@@ -10,6 +10,8 @@ var mongoose = require('mongoose'),
 /**
  * User Schema
  */
+// The schema defines the fields.
+// REF: http://mongoosejs.com/docs/guide.html
 var UserSchema = new Schema({
     name: {
         type: String,
@@ -33,6 +35,7 @@ var UserSchema = new Schema({
 /**
  * Virtuals
  */
+// QUESTION: What does virtual do?
 UserSchema.virtual('password').set(function(password) {
     this._password = password;
     this.salt = this.makeSalt();
@@ -44,11 +47,16 @@ UserSchema.virtual('password').set(function(password) {
 /**
  * Validations
  */
+// Helper function for validating presence.
 var validatePresenceOf = function(value) {
     return value && value.length;
 };
 
 // the below 4 validations only apply if you are signing up traditionally
+// The path corresponds to a field in the schema.
+// validate takes a validation function, passed the value of the field
+// in question, and an error message to return if the validation fails.
+// REF: http://mongoosejs.com/docs/validation.html
 UserSchema.path('name').validate(function(name) {
     // if you are authenticating by any of the oauth strategies, don't validate
     if (!this.provider) return true;
@@ -77,6 +85,8 @@ UserSchema.path('hashed_password').validate(function(hashed_password) {
 /**
  * Pre-save hook
  */
+// Middleware for validation checks.
+// REF: http://mongoosejs.com/docs/middleware.html
 UserSchema.pre('save', function(next) {
     if (!this.isNew) return next();
 
@@ -125,4 +135,5 @@ UserSchema.methods = {
     }
 };
 
+// Register the model with Mongoose.
 mongoose.model('User', UserSchema);
