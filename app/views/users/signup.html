@@ -8,15 +8,16 @@ GOTO: /app/views/users/auth.html
 
 {% block auth %}
     <!-- 
-    The form is populated with user info.
-    QUESTION: How is the user data populated?  This view
-      had a User instance added to it, but these look like Angular bindings.
-
-    QUESTION: What Angular controller picks this up?
+    There is no Angular controller here.  The {{ }} values (user, title) look like
+    Angular bindings, but they're tokens for the template renderer.
+    The {{ }} don't make it to the browser. These template values were
+    provided by the Express controller. /app/controllers/users.js:signup
 
     The form submits to /users.
     GOTO: /app/
      -->
+     {{ funky }}
+
     <form class="signin form-horizontal" action="/users" method="post">
         <div class="form-group">
             <label class="col-md-4 control-label" for="name">Full Name</label>

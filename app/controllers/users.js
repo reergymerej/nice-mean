@@ -38,10 +38,12 @@ exports.signup = function(req, res) {
     // 
     // User was included at the top of this module.
     // It has custom methods including validation.
+    // These values will be passed to the view renderer.
     // GOTO: /app/views/users/signup.html
     res.render('users/signup', {
         title: 'Sign up',
-        user: new User()
+        user: new User(),
+        funky: 'chicken'
     });
 };
 
