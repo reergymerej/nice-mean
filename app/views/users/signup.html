@@ -1,6 +1,22 @@
+<!-- 
+This view extends another, so it's content
+will be plugged into the corresponding "block auth"
+in auth.html.
+GOTO: /app/views/users/auth.html
+ -->
 {% extends 'auth.html' %}
 
 {% block auth %}
+    <!-- 
+    The form is populated with user info.
+    QUESTION: How is the user data populated?  This view
+      had a User instance added to it, but these look like Angular bindings.
+
+    QUESTION: What Angular controller picks this up?
+
+    The form submits to /users.
+    GOTO: /app/
+     -->
     <form class="signin form-horizontal" action="/users" method="post">
         <div class="form-group">
             <label class="col-md-4 control-label" for="name">Full Name</label>

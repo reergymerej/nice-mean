@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
 
     // Get an instance of the User model.
-    // The model was defined in /app/models/users.js.
+    // The model was defined in /app/models/user.js.
     User = mongoose.model('User');
 
 /**
@@ -35,8 +35,10 @@ exports.signup = function(req, res) {
     // Load with the title and an instance of User.
     // User is a Mongoose model.
     // REF: http://mongoosejs.com/docs/models.html
-
+    // 
     // User was included at the top of this module.
+    // It has custom methods including validation.
+    // GOTO: /app/views/users/signup.html
     res.render('users/signup', {
         title: 'Sign up',
         user: new User()
