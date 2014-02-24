@@ -1,13 +1,43 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope" itemtype="http://schema.org/Product">
+    <!--
+    Another html snippet is included here.
+
+    GOTO: /app/views/includes/head.html
+    -->
 	{% include '../includes/head.html' %}
 	<body>
+
+        <!-- 
+        The header (not the <head>) is included here by Angular.
+        Angular directives have the prefix "data-" for html validation reasons.
+        Angular ignores this prefix when converting the attribute to a directive name.
+        data-ng-include is the same as ngInclude
+        REF: http://docs.angularjs.org/guide/directive
+
+        The header is included by Angular, not Express, so the path is different.
+        
+        GOTO: /public/views/header.html
+         -->
 		<div class="navbar navbar-inverse navbar-fixed-top" data-ng-include="'views/header.html'" data-role="navigation"></div>
 		<section class="content">
             <section class="container">
+
+                <!-- 
+                The content for the page is added here, matched up 
+                by "block content".
+                 -->
   		        {% block content %}{% endblock %}
             </section>
         </section>
+
+        <!-- 
+        Yet another snippet, this time it's the footer.
+        The Angular JS scripts are loaded here, at the end of the body,
+        for performance.
+
+        GOTO: /app/views/includes/foot.html
+         -->
         {% include '../includes/foot.html' %}
     </body>
 </html>

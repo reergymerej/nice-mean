@@ -1,3 +1,10 @@
+<!--
+This view extends another.  This means the content in the view
+is plugged into a template.  Each of the pages have the same outer
+content, it's just this inner part that changes.
+
+GOTO: /app/views/layouts/default.html
+-->
 {% extends 'layouts/default.html' %}
 {% block content %}
     <section data-ui-view />
