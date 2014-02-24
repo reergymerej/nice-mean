@@ -2,6 +2,10 @@
 
 This is a fork of [Linnovate's MEAN stack](https://github.com/linnovate/mean) with lots of comments from the layman's perspective.  The functionality of the code is the same.  The only difference is this version should be more accessible to noobs like me.
 
+## Where to Start
+
+The approach is to step through the application explaining things as we encounter them.  When the code jumps to another file, you'll find a `GOTO:` comment.  As we all know, [the best place to start](http://www.youtube.com/watch?v=1RW3nDRmu6k) is the beginning.  In this case, a `GET` request to '/', which is picked up by /app/routes/index.js.  I suggest you start there.
+
 *WARNING: There's no guarantee that the comments will be right 100% of the time.  I'm learning too.*
 
 ---
