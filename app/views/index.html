@@ -7,6 +7,12 @@ GOTO: /app/views/layouts/default.html
 -->
 {% extends 'layouts/default.html' %}
 {% block content %}
+
+    <!-- 
+    The uiView directive is used by AngularUI Router to indicate
+    where the Angular templates will be rendered.
+    REF: http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.directive:ui-view
+     -->
     <section data-ui-view />
     <script type="text/javascript">
 

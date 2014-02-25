@@ -1,3 +1,8 @@
+<!-- 
+This view uses the ArticlesController.
+ngInit executes the controller's "findOne" method immediately.
+GOTO: /public/js/controllers/articles.js :$scope.findOne
+ -->
 <section data-ng-controller="ArticlesController" data-ng-init="findOne()">
     <span>{{article.created | date:'medium'}}</span> /
     <span>{{article.user.name}}</span>

@@ -12,6 +12,8 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
     // The nav links you see once you log in are pulled from here.
     $scope.menu = [{
         'title': 'Articles',
+
+        // GOTO: /public/js/config.js (GET /articles)
         'link': 'articles'
     }, {
         'title': 'Create New Article',

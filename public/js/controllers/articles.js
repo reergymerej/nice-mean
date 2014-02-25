@@ -1,5 +1,11 @@
 'use strict';
 
+// This controller is defined in the 'mean.articles' module.
+// $scope       This is created for each directive.
+// $stateParams This comes from AngularUI Router.
+// $location    http://docs.angularjs.org/guide/dev_guide.services.$location
+// Global       /public/js/services/global.js
+// Articles     /public/js/services/articles.js
 angular.module('mean.articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Global', 'Articles', function ($scope, $stateParams, $location, Global, Articles) {
     $scope.global = Global;
 
@@ -44,14 +50,31 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$st
         });
     };
 
+    // This finds all the articles.
     $scope.find = function() {
+
+        // Articles is a service injected into this controller.
+        // "query" gets all the $resources as an array.
         Articles.query(function(articles) {
+
+            // Once the call is complete, the articles
+            // are assigned to the controller's scope.
             $scope.articles = articles;
         });
     };
 
+    // This finds a specific article by id.
     $scope.findOne = function() {
+
+        // Use our Articles service.
+        // "get" appears to be used instead of "query"
+        // for fetching a specific record.
         Articles.get({
+
+            // Specify the "articleId" the resource should use.
+            // Pull the value from $stateParams.  The $stateParams
+            // value was set when the route was handled (/public/js/config.js).
+            // GOTO: /public/js/services/articles.js
             articleId: $stateParams.articleId
         }, function(article) {
             $scope.article = article;
