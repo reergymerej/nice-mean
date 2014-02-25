@@ -20,8 +20,16 @@ exports.authCallback = function(req, res) {
  * Show login form
  */
 exports.signin = function(req, res) {
+
+    // Render the template /app/views/users/signin.html.
+    // We don't need to specify the directory or the extension
+    // because that is handled in the Express setup in /config/express.js
+    // Pass the title and message to the template.
+    // GOTO: /app/views/users/signin.html
     res.render('users/signin', {
         title: 'Signin',
+
+        // QUESTION: What adds flash?
         message: req.flash('error')
     });
 };
@@ -58,7 +66,12 @@ exports.signout = function(req, res) {
 /**
  * Session
  */
+// This is called when logging in successfully.
 exports.session = function(req, res) {
+
+    // This renders the home page, just like before,
+    // but this time we're logged in.
+    // GOTO: /app/routes/index.js (GET /)
     res.redirect('/');
 };
 

@@ -6,6 +6,11 @@ var users = require('../controllers/users');
 
 module.exports = function(app, passport) {
 
+    // The http method and path determine which method is executed.
+    
+
+    // Execute the "signin" method of the users controller.
+    // GOTO: /app/controllers/users.js:signin
     app.get('/signin', users.signin);
 
     // Execute the signup method of the users controller.
@@ -24,9 +29,16 @@ module.exports = function(app, passport) {
     app.param('userId', users.user);
 
     // Setting the local strategy route
+    // This is called when logging in.  Use Passport to authenticate.
+    // REF: http://passportjs.org/guide/authenticate/
     app.post('/users/session', passport.authenticate('local', {
+
+        // GOTO: [this file] (GET /signin)
         failureRedirect: '/signin',
         failureFlash: true
+
+        // This is the handler for a successful login.
+        // GOTO: /app/controllers/users.js:session
     }), users.session);
 
     // Setting the facebook oauth routes

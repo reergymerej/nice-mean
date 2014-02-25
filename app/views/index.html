@@ -9,6 +9,10 @@ GOTO: /app/views/layouts/default.html
 {% block content %}
     <section data-ui-view />
     <script type="text/javascript">
+
+        // If the user was included in the view,
+        // assign it as a global variable.
+        // REF: http://paularmstrong.github.io/swig/docs/
         window.user = {{user|safe}};
     </script>
 {% endblock %}

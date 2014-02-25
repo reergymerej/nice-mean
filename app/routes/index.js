@@ -8,8 +8,8 @@ module.exports = function(app) {
 
     // When the '/' path is requested,
     // execute the "render" method of the index controller.
-    // GOTO: /app/controllers/index:render
     // REF: http://expressjs.com/api.html#app.get
+    // GOTO: /app/controllers/index:render
     app.get('/', index.render);
 
 };
