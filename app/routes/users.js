@@ -15,6 +15,9 @@ module.exports = function(app, passport) {
     app.get('/users/me', users.me);
 
     // Setting up the users api
+    // This route is triggered by submitting the signup form.
+    // The "create" method of the users controller is called.
+    // GOTO: /app/controllers/users.js:create
     app.post('/users', users.create);
 
     // Setting up the userId param

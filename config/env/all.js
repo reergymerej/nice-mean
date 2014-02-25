@@ -7,6 +7,8 @@ module.exports = {
 	root: rootPath,
 	port: process.env.PORT || 3000,
 	db: process.env.MONGOHQ_URL,
+
+    // This is responsible for handling our templates.
 	templateEngine: 'swig',
 
 	// The secret should be set to a non-guessable string that

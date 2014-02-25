@@ -65,13 +65,23 @@ exports.session = function(req, res) {
 /**
  * Create user
  */
+// This method is triggered when the signup form is submitted.
 exports.create = function(req, res, next) {
+
+    // A new User is created, loaded with the data
+    // from the request.  With POST requests, the data
+    // is in req.body.
+    // REF: http://expressjs.com/api.html#req.body
     var user = new User(req.body);
     var message = null;
 
     user.provider = 'local';
+
+    // Attempt to save the new User instance.
     user.save(function(err) {
         if (err) {
+
+            // REF: http://www.mongodb.org/about/contributors/error-codes/
             switch (err.code) {
                 case 11000:
                 case 11001:
@@ -81,13 +91,24 @@ exports.create = function(req, res, next) {
                     message = 'Please fill all the required fields';
             }
 
+            // Re-render the signup page, passing our User instance
+            // and error message to the template.
+            // GOTO: /app/routes/users.js
             return res.render('users/signup', {
                 message: message,
                 user: user
             });
         }
+
+        // Log the user in using the Passport middleware.
+        // REF: http://passportjs.org/guide/login/
         req.logIn(user, function(err) {
             if (err) return next(err);
+
+            // Passport makes the user available through req.user.
+            // Now that we're logged in, go to the / path.
+            // REF: http://expressjs.com/api.html#res.redirect
+            // GOTO: /app/routes/index.js
             return res.redirect('/');
         });
     });

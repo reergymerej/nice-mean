@@ -13,10 +13,12 @@ GOTO: /app/views/users/auth.html
     The {{ }} don't make it to the browser. These template values were
     provided by the Express controller. /app/controllers/users.js:signup
 
-    The form submits to /users.
-    GOTO: /app/
-     -->
-     {{ funky }}
+    The template engine is "swig", defined in /config/env/all.js.
+    REF: http://paularmstrong.github.io/swig/
+
+    The form submits to /users.  There's nothing "Angular" about this form.
+    GOTO: /app/routes/users.js
+    -->
 
     <form class="signin form-horizontal" action="/users" method="post">
         <div class="form-group">
@@ -46,6 +48,10 @@ GOTO: /app/views/users/auth.html
         <div class="form-group">
             <div class="col-md-offset-4 col-md-8">
                 <button class="btn btn-primary" type="submit">Sign up</button>&nbsp;
+
+                <!-- 
+                TODO: follow this
+                -->
                 or&nbsp;<a class="show-login" href="/signin">login</a>
             </div>
         </div>
