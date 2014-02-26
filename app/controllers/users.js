@@ -59,7 +59,12 @@ exports.signup = function(req, res) {
  * Logout
  */
 exports.signout = function(req, res) {
+
+    // logout is added to the request by Passport.
+    // REF: http://passportjs.org/guide/logout/
     req.logout();
+
+    // GOTO: /app/routes/index.js (GET /)
     res.redirect('/');
 };
 

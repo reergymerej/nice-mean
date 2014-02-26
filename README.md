@@ -8,6 +8,11 @@ The approach is to step through the application explaining things as we encounte
 
 *WARNING: There's no guarantee that the comments will be right 100% of the time.  I'm learning too.*
 
+
+## Yeah, You Too
+
+I may skip over things if they're obvious.  Please fork if you'd like to help - the more eyes and perspectives the better.
+
 ---
 
 # MEAN Stack

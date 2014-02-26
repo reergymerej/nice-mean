@@ -16,6 +16,8 @@ module.exports = function(app, passport) {
     // Execute the signup method of the users controller.
     // GOTO: /app/controllers/users.js:signup
     app.get('/signup', users.signup);
+
+    // GOTO: /app/controllers/users.js:signout
     app.get('/signout', users.signout);
     app.get('/users/me', users.me);
 
