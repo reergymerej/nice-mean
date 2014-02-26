@@ -28,18 +28,25 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$st
 
         // Save the $resource.
         // REF: http://docs.angularjs.org/api/ngResource/service/$resource
+        // If the XHR fails, the 2nd callback will run.
         article.$save(function(response) {
 
-            // The response is the saved article.
+            // response === article
+
+            // Since the template uses native form validation ("required" attribute), it should
+            // not be possible to submit without the required fields.
+            // If it were possible, the response would contain response.errors
+            // with the validation errors defined in /app/models/article.js.
+
             // All MongoDB items (AKA documents) have an
             // auto-generated _id field.
             // REF: http://docs.mongodb.org/manual/core/document/
-            // 
+
             // Redirect to view the saved article.
             // REF: http://docs.angularjs.org/api/ng/service/$location
             // GOTO: /public/js/config.js (GET /articles/article_id)
             $location.path('articles/' + response._id);
-        });
+        }/*, function (response) { console.error('oh, shit', response); }*/);
 
         this.title = '';
         this.content = '';
