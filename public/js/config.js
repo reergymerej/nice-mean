@@ -26,6 +26,8 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
     })
       .state('edit article', {
         url: '/articles/:articleId/edit',
+
+        // GOTO: /public/views/articles/edit.html
         templateUrl: 'views/articles/edit.html'
     })
 

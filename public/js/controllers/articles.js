@@ -7,6 +7,8 @@
 // Global       /public/js/services/global.js
 // Articles     /public/js/services/articles.js
 angular.module('mean.articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Global', 'Articles', function ($scope, $stateParams, $location, Global, Articles) {
+
+    // Give this controller's scope access to the Global values.
     $scope.global = Global;
 
     $scope.create = function() {
@@ -22,7 +24,9 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$st
         this.content = '';
     };
 
+    // Delete an article.
     $scope.remove = function(article) {
+
         if (article) {
             article.$remove();
 
@@ -33,19 +37,41 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$st
             }
         }
         else {
+
+            // When called from the article view, no article
+            // is specified since we already know we're dealing
+            // with the article in this controller's scope.
+            // Remove the article.
+            // REF: http://docs.angularjs.org/api/ngResource/service/$resource
             $scope.article.$remove();
+
+            // Redirect back to all articles.
+            // path() gets the path, path('foo') sets the path
+            // REF: http://docs.angularjs.org/api/ng/service/$location
+            // GOTO: /public/js/config.js (GET /articles);
             $location.path('articles');
         }
     };
 
+    // This is called by the edit page. (/public/views/articles/edit.html)
     $scope.update = function() {
         var article = $scope.article;
+
+        // QUESTION: What does this array do?
+        // The updated array is sent to the server, but the model
+        // doesn't have an updated field.  "updated" is not referenced
+        // anywhere else on the client-side.
         if (!article.updated) {
             article.updated = [];
         }
         article.updated.push(new Date().getTime());
 
+        // PUT the updates.
+        // REF: http://docs.angularjs.org/api/ngResource/service/$resource
         article.$update(function() {
+
+            // Once updated, redirect to view the article.
+            // GOTO: /public/js/config.js (GET /articles/articleId)
             $location.path('articles/' + article._id);
         });
     };
@@ -74,9 +100,12 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$st
             // Specify the "articleId" the resource should use.
             // Pull the value from $stateParams.  The $stateParams
             // value was set when the route was handled (/public/js/config.js).
-            // GOTO: /public/js/services/articles.js
+            // GOTO: /public/js/services/articles.js to see how the articleId
+            // is inserted into the url.
             articleId: $stateParams.articleId
         }, function(article) {
+
+            // Assign the article to the controller's scope.
             $scope.article = article;
         });
     };
