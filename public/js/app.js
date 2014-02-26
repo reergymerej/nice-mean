@@ -6,6 +6,6 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.router', 
 
 // These are dependent modules.
 // If you're defining new modules, don't forget to define them
-// as well as include them as dependencies.
+// as well as include them as dependencies for the main 'mean' module.
 angular.module('mean.system', []);
 angular.module('mean.articles', []);

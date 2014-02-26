@@ -21,6 +21,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
         // GOTO: /public/js/config.js (GET /articles/create)
         'link': 'articles/create'
     }];
-    
+
+    // This isn't used anywhere.
     $scope.isCollapsed = false;
 }]);
