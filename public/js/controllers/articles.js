@@ -12,11 +12,32 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$st
     $scope.global = Global;
 
     $scope.create = function() {
+
+        // Create a new instance of the Articles $resource.
+        // $resource allows for easy CRUD operations.
+        // 
+        // this === $scope
+        // this.title and this.content are added to the scope
+        // through ngModel in the view (/public/views/articles/create.html).
         var article = new Articles({
+
+            // Load the values into the $resource.
             title: this.title,
             content: this.content
         });
+
+        // Save the $resource.
+        // REF: http://docs.angularjs.org/api/ngResource/service/$resource
         article.$save(function(response) {
+
+            // The response is the saved article.
+            // All MongoDB items (AKA documents) have an
+            // auto-generated _id field.
+            // REF: http://docs.mongodb.org/manual/core/document/
+            // 
+            // Redirect to view the saved article.
+            // REF: http://docs.angularjs.org/api/ng/service/$location
+            // GOTO: /public/js/config.js (GET /articles/article_id)
             $location.path('articles/' + response._id);
         });
 

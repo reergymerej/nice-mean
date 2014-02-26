@@ -12,7 +12,10 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
     // states for my app
     $stateProvider
 
-      // QUESTION: How are the states used?
+      // The states aren't used anywhere, but they could be.
+      // Using state allows for routing by url or a named state 
+      // (see the "go" method in the docs).
+      // REF: http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$state
       .state('all articles', {
         url: '/articles',
 
@@ -22,6 +25,7 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
     })
       .state('create article', {
         url: '/articles/create',
+        // GOTO: /public/views/articles/create.html
         templateUrl: 'views/articles/create.html'
     })
       .state('edit article', {
@@ -41,8 +45,12 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
         // GOTO: /public/views/articles/view.html
         templateUrl: 'views/articles/view.html'
     })
+
+      // This is the default when no other routes were matched.
       .state('home', {
         url: '/',
+
+        // GOTO: /public/views/index.html
         templateUrl: 'views/index.html'
     });
 }

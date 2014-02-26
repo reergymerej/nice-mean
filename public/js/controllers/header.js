@@ -17,6 +17,8 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
         'link': 'articles'
     }, {
         'title': 'Create New Article',
+
+        // GOTO: /public/js/config.js (GET /articles/create)
         'link': 'articles/create'
     }];
     
