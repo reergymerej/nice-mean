@@ -136,14 +136,21 @@ exports.create = function(req, res, next) {
 /**
  * Send User
  */
+// This appears to be just for testing purposes.
+// You can see the current user with http://localhost:3000/users/me.
 exports.me = function(req, res) {
+    // "user" is provided by Passport.
+    // REF: http://passportjs.org/guide/login/
     res.jsonp(req.user || null);
 };
 
 /**
  * Find user by id
  */
+// QUESTION: Where is this used?
 exports.user = function(req, res, next, id) {
+
+    console.log('hello');
     // QUESTION: What's using this?
     User
         .findOne({

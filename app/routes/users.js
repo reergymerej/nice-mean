@@ -19,6 +19,8 @@ module.exports = function(app, passport) {
 
     // GOTO: /app/controllers/users.js:signout
     app.get('/signout', users.signout);
+
+    // QUESTION: When is this used?
     app.get('/users/me', users.me);
 
     // Setting up the users api
@@ -28,7 +30,29 @@ module.exports = function(app, passport) {
     app.post('/users', users.create);
 
     // Setting up the userId param
+    // "param" allows you to inject logic when a parameter
+    // is present in a request.
+    // REF: http://expressjs.com/api.html#app.param
+    // 
+    // // This route has a :bar param.
+    // app.get('/foo/:bar', function (req, res) {
+    //     res.end('Was :bar "asdf"? ' + req.message);
+    // });
+    // 
+    // // If the :bar param is present in the route,
+    // // we get the chance to do work before the route's
+    // // callback is executed.
+    // app.param(':bar', function (req, res, next, id) {
+    //     req.message = id === 'asdf';
+    //     next();
+    // });
+    // 
+    // Try out different values to see the result.
+    // http://localhost:3000/foo/qwerty
+    // 
+    // All that aside, I can't figure out where this is being used.
     app.param('userId', users.user);
+
 
     // Setting the local strategy route
     // This is called when logging in.  Use Passport to authenticate.
