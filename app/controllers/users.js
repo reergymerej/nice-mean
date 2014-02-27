@@ -29,7 +29,8 @@ exports.signin = function(req, res) {
     res.render('users/signin', {
         title: 'Signin',
 
-        // QUESTION: What adds flash?
+        // "flash" is added to requests by connect-flash
+        // REF: https://github.com/jaredhanson/connect-flash
         message: req.flash('error')
     });
 };
@@ -143,6 +144,7 @@ exports.me = function(req, res) {
  * Find user by id
  */
 exports.user = function(req, res, next, id) {
+    // QUESTION: What's using this?
     User
         .findOne({
             _id: id
