@@ -49,6 +49,7 @@ var walk = function(path) {
     });
 };
 // This loads all our models into memory.
+// GOTO: /app/models/article.js
 walk(models_path);
 
 // Bootstrap passport config
