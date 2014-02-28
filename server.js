@@ -5,7 +5,12 @@
  */
 var express = require('express'),
     fs = require('fs'),
+
+    // Passport is used for authentication.
+    // REF: http://passportjs.org/
     passport = require('passport'),
+
+    // REF: https://github.com/linnovate/mean-logger
     logger = require('mean-logger');
 
 /**
@@ -18,7 +23,11 @@ var express = require('express'),
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Initializing system variables 
+// GOTO: /config/config.js
 var config = require('./config/config'),
+    
+    // Mongoose is used to interact with MongoDB.
+    // REF: http://mongoosejs.com/
     mongoose = require('mongoose');
 
 // Bootstrap db connection
@@ -39,6 +48,7 @@ var walk = function(path) {
         }
     });
 };
+// This loads all our models into memory.
 walk(models_path);
 
 // Bootstrap passport config

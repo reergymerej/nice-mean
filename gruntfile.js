@@ -12,11 +12,18 @@ module.exports = function(grunt) {
     // You can run most of these by specifying them after "grunt" in terminal.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+
+        // This watches files for changes.  When they change,
+        // the specified tasks are run.
         watch: {
             js: {
                 files: ['gruntfile.js', 'server.js', 'app/**/*.js', 'public/js/**', 'test/**/*.js'],
+
+                // REF: https://github.com/gruntjs/grunt-contrib-watch#tasks
                 tasks: ['jshint'],
                 options: {
+
+                    // REF: https://github.com/gruntjs/grunt-contrib-watch#optionslivereload
                     livereload: true,
                 },
             },
@@ -44,8 +51,11 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+        // This starts up the server.
         nodemon: {
             dev: {
+                // GOTO: /server.js
                 script: 'server.js',
                 options: {
                     args: [],
@@ -60,6 +70,8 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+        // This runs multiple tasks at the same time.
         concurrent: {
             tasks: ['nodemon', 'watch'],
             options: {
@@ -93,11 +105,17 @@ module.exports = function(grunt) {
 
     //Load NPM tasks
     // REF: http://gruntjs.com/getting-started#loading-grunt-plugins-and-tasks
+
+    // REF: https://github.com/gruntjs/grunt-contrib-watch
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-karma');
+
+    // REF: https://www.npmjs.org/package/grunt-nodemon
     grunt.loadNpmTasks('grunt-nodemon');
+
+    // REF: https://github.com/sindresorhus/grunt-concurrent
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-env');
 
@@ -106,6 +124,8 @@ module.exports = function(grunt) {
 
     // REF: http://gruntjs.com/getting-started#custom-tasks
     //Default task(s).
+    // When starting the app with "grunt", this is the main entry point.
+    // Grunt runs the jshint and concurrent tasks defined above.
     grunt.registerTask('default', ['jshint', 'concurrent']);
 
     //Test task.
