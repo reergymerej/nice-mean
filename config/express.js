@@ -4,12 +4,26 @@
  * Module dependencies.
  */
 var express = require('express'),
+
+    // Consolidate is used as an interface for different
+    // templating engines.
+    // REF: https://github.com/visionmedia/consolidate.js/
     consolidate = require('consolidate'),
+
+    // connect-mongo is used to make establishing connections
+    // to MongoDB easier.
+    // REF: https://github.com/kcbanner/connect-mongo#example
     mongoStore = require('connect-mongo')(express),
 
-    // https://github.com/jaredhanson/connect-flash
+    // REF: https://github.com/jaredhanson/connect-flash
     flash = require('connect-flash'),
+
+    // REF: https://github.com/madhums/node-view-helpers
     helpers = require('view-helpers'),
+
+    // This loads the combo config from 'all.js' and the
+    // the file that matches whatever environment is specified
+    // in /server.js (process.env.NODE_ENV).
     config = require('./config');
 
 module.exports = function(app, passport, db) {
@@ -88,6 +102,7 @@ module.exports = function(app, passport, db) {
         // use instanceof etc.
         app.use(function(err, req, res, next) {
             // Treat as 404
+            // This is a clever way of testing for a substring.
             if (~err.message.indexOf('not found')) return next();
 
             // Log it
