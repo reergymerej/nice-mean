@@ -80,7 +80,9 @@ module.exports = function(grunt) {
         },
 
         // Run Mocha tests.
-        // QUESTION: What's Mocha?
+        // Mocha is used to test the server-side code.
+        // REF: http://visionmedia.github.io/mocha/
+        // GOTO: /test/mocha/article/model.js
         mochaTest: {
             options: {
                 reporter: 'spec',
@@ -95,7 +97,8 @@ module.exports = function(grunt) {
         },
 
         // Run Karma tests.
-        // QUESTION: What's Karma?
+        // Karma is used to test the Angular JS code.
+        // REF: http://karma-runner.github.io/0.10/index.html
         karma: {
             unit: {
                 configFile: 'test/karma/karma.conf.js'

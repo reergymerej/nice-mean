@@ -15,7 +15,15 @@ var article;
 //The tests
 describe('<Unit Test>', function() {
     describe('Model Article:', function() {
+
+        // Before each test, create a new user and
+        // save it.  We need this because the article
+        // requires an associated user.  This happens
+        // before each "it" function.
         beforeEach(function(done) {
+
+            console.log('creating a new user');
+
             user = new User({
                 name: 'Full name',
                 email: 'test@test.com',
@@ -52,6 +60,9 @@ describe('<Unit Test>', function() {
             });
         });
 
+        // This runs after each test.
+        // It appears to errantly remove ALL
+        // of the articles and users.
         afterEach(function(done) {
             Article.remove({});
             User.remove({});

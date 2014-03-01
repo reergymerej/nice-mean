@@ -54,6 +54,7 @@ var walk = function(path) {
 walk(models_path);
 
 // Bootstrap passport config
+// GOTO: /config/passport.js
 require('./config/passport')(passport);
 
 var app = express();
