@@ -22,8 +22,6 @@ describe('<Unit Test>', function() {
         // before each "it" function.
         beforeEach(function(done) {
 
-            console.log('creating a new user');
-
             user = new User({
                 name: 'Full name',
                 email: 'test@test.com',
@@ -45,6 +43,13 @@ describe('<Unit Test>', function() {
         describe('Method Save', function() {
             it('should be able to save without problems', function(done) {
                 return article.save(function(err) {
+                    // This notation is kind of weird.  Typically, you'd
+                    // use err.should.not.exist.  The assertions work
+                    // because "should" has been added to the Object prototype.
+                    // If the object doesn't exist (or was created with Object.create(null))
+                    // the assertions are undefined and the test fails in a way
+                    // that was unexpected.
+                    // REF: https://github.com/visionmedia/should.js/#chaining-assertions
                     should.not.exist(err);
                     done();
                 });
