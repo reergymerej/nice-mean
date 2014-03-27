@@ -52,31 +52,31 @@ var validatePresenceOf = function(value) {
     return value && value.length;
 };
 
-// the below 4 validations only apply if you are signing up traditionally
+// The 4 validations below only apply if you are signing up traditionally.
 // The path corresponds to a field in the schema.
 // validate takes a validation function, passed the value of the field
 // in question, and an error message to return if the validation fails.
 // REF: http://mongoosejs.com/docs/validation.html
 UserSchema.path('name').validate(function(name) {
-    // if you are authenticating by any of the oauth strategies, don't validate
+    // If you are authenticating by any of the oauth strategies, don't validate.
     if (!this.provider) return true;
     return (typeof name === 'string' && name.length > 0);
 }, 'Name cannot be blank');
 
 UserSchema.path('email').validate(function(email) {
-    // if you are authenticating by any of the oauth strategies, don't validate
+    // If you are authenticating by any of the oauth strategies, don't validate.
     if (!this.provider) return true;
     return (typeof email === 'string' && email.length > 0);
 }, 'Email cannot be blank');
 
 UserSchema.path('username').validate(function(username) {
-    // if you are authenticating by any of the oauth strategies, don't validate
+    // If you are authenticating by any of the oauth strategies, don't validate.
     if (!this.provider) return true;
     return (typeof username === 'string' && username.length > 0);
 }, 'Username cannot be blank');
 
 UserSchema.path('hashed_password').validate(function(hashed_password) {
-    // if you are authenticating by any of the oauth strategies, don't validate
+    // If you are authenticating by any of the oauth strategies, don't validate.
     if (!this.provider) return true;
     return (typeof hashed_password === 'string' && hashed_password.length > 0);
 }, 'Password cannot be blank');

@@ -12,6 +12,7 @@ module.exports = function(grunt) {
     // You can run most of these by specifying them after "grunt" in terminal.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        assets: grunt.file.readJSON('config/assets.json'),
 
         // This watches files for changes.  When they change,
         // the specified tasks are run.
@@ -22,7 +23,6 @@ module.exports = function(grunt) {
                 // REF: https://github.com/gruntjs/grunt-contrib-watch#tasks
                 tasks: ['jshint'],
                 options: {
-
                     // REF: https://github.com/gruntjs/grunt-contrib-watch#optionslivereload
                     livereload: true,
                 },
@@ -30,11 +30,12 @@ module.exports = function(grunt) {
             html: {
                 files: ['public/views/**', 'app/views/**'],
                 options: {
-                    livereload: true,
-                },
+                    livereload: true
+                }
             },
             css: {
                 files: ['public/css/**'],
+                tasks: ['csslint'],
                 options: {
                     livereload: true
                 }
@@ -51,7 +52,24 @@ module.exports = function(grunt) {
                 }
             }
         },
-
+        uglify: {
+            production: {
+                files: '<%= assets.js %>'
+            }
+        },
+        csslint: {
+            options: {
+                csslintrc: '.csslintrc'
+            },
+            all: {
+                src: ['public/css/**/*.css']
+            }
+        },
+        cssmin: {
+            combine: {
+                files: '<%= assets.css %>'
+            }
+        },
         // This starts up the server.
         nodemon: {
             dev: {
@@ -60,7 +78,7 @@ module.exports = function(grunt) {
                 options: {
                     args: [],
                     ignore: ['public/**'],
-                    ext: 'js',
+                    ext: 'js,html',
                     nodeArgs: ['--debug'],
                     delayTime: 1,
                     env: {
@@ -108,7 +126,9 @@ module.exports = function(grunt) {
 
     //Load NPM tasks
     // REF: http://gruntjs.com/getting-started#loading-grunt-plugins-and-tasks
-
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     // REF: https://github.com/gruntjs/grunt-contrib-watch
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -129,7 +149,11 @@ module.exports = function(grunt) {
     //Default task(s).
     // When starting the app with "grunt", this is the main entry point.
     // Grunt runs the jshint and concurrent tasks defined above.
-    grunt.registerTask('default', ['jshint', 'concurrent']);
+    if (process.env.NODE_ENV === 'production') {
+        grunt.registerTask('default', ['jshint', 'csslint', 'cssmin', 'uglify', 'concurrent']);
+    } else {
+        grunt.registerTask('default', ['jshint', 'csslint', 'concurrent']);
+    }
 
     //Test task.
     grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);

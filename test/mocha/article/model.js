@@ -69,19 +69,8 @@ describe('<Unit Test>', function() {
         // It appears to errantly remove ALL
         // of the articles and users.
         afterEach(function(done) {
-            Article.remove({});
-            User.remove({});
-            done();
-        });
-        after(function(done) {
-            // QUESTION: What's with the exec?
-            // It looks like you can do remove(fn) or remove().exec
-            // to differentiate between async/sync processes.
-            // We'll learn more about this when we brush up
-            // on MongoDB.
-            // REF: http://stackoverflow.com/a/10266789/1319850
-            Article.remove().exec();
-            User.remove().exec();
+            article.remove();
+            user.remove();
             done();
         });
     });
